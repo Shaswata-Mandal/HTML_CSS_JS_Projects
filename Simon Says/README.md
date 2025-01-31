@@ -1,4 +1,8 @@
 # Project Name: Simon Says
+# Project URL: https://shaswata-mandal.github.io/HTML_CSS_JS_Projects/Simon%20Says/
+
+--> Start Date: 29-01-2025
+--> End Date: 31-01-2025
 
 --> Simon Says is a fun and interactive memory game that tests your ability to recall and repeat sequences. The game was originally a physical toy but has since been adapted into digital versions.
 
