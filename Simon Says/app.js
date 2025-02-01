@@ -12,6 +12,11 @@ let hints=5;
 //Start decting for the key press
 start();
 
+if(window.innerWidth<=1024){
+    document.querySelector(".game_status").addEventListener("click", keyDetection);
+    document.querySelector(".game_status").innerText="Press Here To Start The Game";
+}
+
 //Function to start decting for the key press
 function start(){
     document.addEventListener("keypress", keyDetection);
@@ -24,6 +29,8 @@ function keyDetection(){
 
     //stop detecting keypress after the game has started
     document.removeEventListener("keypress", keyDetection);
+    document.querySelector(".game_status").removeEventListener("click", keyDetection);
+
 
     //Updating current score to zero before starting the current game
     //Updating the current score
@@ -127,6 +134,10 @@ function wrongSeq(){
     //Updating the game status message
     let h1=document.querySelector(".game_status");
     h1.innerText="Wrong Choice! Use Hearts/Restart";
+    if(window.innerWidth<=1024){
+        h1.innerText="Wrong! Use Hearts/Press Here";
+        h1.style.textAlign="center";
+    }
 
     if(hearts==0){
         h1.innerText="Press any key to restart the game!";
@@ -185,6 +196,9 @@ function heartFunctioning(){
 //If not heart then restart after any key is pressed
 function restart(){
     document.addEventListener("keypress", reset);
+    if(window.innerWidth<=1024){
+        document.querySelector(".game_status").addEventListener("click", reset);
+    }
 }
 
 
@@ -193,6 +207,7 @@ function reset(){
 
     //Removing the event from the document so that after pressing once, it does not accepts any other keypress
     document.removeEventListener("keypress", reset);
+    document.querySelector(".game_status").removeEventListener("click", reset);
     
     //Updating the current score
     let currentScore=document.querySelector(".previousScore");
@@ -319,4 +334,18 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.classList.add("dark-theme");
         }
     });
+});
+
+
+// --------------------------------------------------------------------------------------------------
+//Code for dynamic changing of website title 
+document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+        document.title = "Come back! 😢";
+    } else {
+        document.title = "Glad you're back! 😊";
+        setTimeout(()=>{
+            document.title = "Simon Says";
+        }, 2000);
+    }
 });

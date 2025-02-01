@@ -577,22 +577,19 @@
         /* background-color: pink; */
     }
 
-    .score, .hearts, .hint{
+    .score, .hearts{
         margin-bottom: 8px;
         transform: scale(0.8);
     }
 
     .hearts{
         position: relative;
-
-        top: -45px;
-        right: -20px;
+        top: -40px;
+        right: 10px;
     }
 
-    .hint{
-        position: relative;
-        top: -40px;
-        left: -20px;
+    .game_status{
+        text-align: center;
     }
 
     .flexible-container .right{
@@ -614,12 +611,67 @@
         margin-bottom: 20px;
     }
 
+}
+
+@media (max-width: 480px) {
+    .hint {
+        width: 136px; /* Reduce width */
+        height: 104px; /* Reduce height */
+        font-size: 15px; /* Reduce font size */
+        position: relative;
+        top: -50px;
+        left: -30px;
+        transform-origin: center center !important;
+    }
+
+    .hint .front, .hint .back {
+        width: 100%;
+        height: 100%;
+    }
+
     .hint .back{
-        height: 104px;
-        width: 136px;
-        font-size: 18px;
+        position: relative;
+        top: -114px;
+        left: -20px;
+    }
+
+    .front span{
+        font-size: 48px;
+    }
+
+    .game_status{
+        margin-top: 8px;
+        text-align: center;
+    }
+
+    .right{
+        min-height: 365px;
+    }
+
+    .hint .back {
+        font-size: 20px; /* Adjust text size */
+        
+    }
+
+    .overlay .alert{
+        width: 320px;
+        height: 90px;
+        position: fixed;
+        top: 0;
+    }
+
+    .overlay .alert div{
+        height: 70px;
+        width: 220px;
+        margin-right: 10px;
+    }
+
+    .overlay .alert .cross{
+        width: 18px;
+        height: 26px;
+        position: relative;
+        top: -6px;
     }
 
 }
-
 /* --------------------------------------------------------------------------------------------- */
