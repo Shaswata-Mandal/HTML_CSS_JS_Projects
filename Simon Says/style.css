@@ -78,7 +78,6 @@
 #AboutMe .qrCode{
     border: 3px solid black;
     border-radius: 10px;
-    background-color: red;
     height: 400px;
     width: 300px;
     background-image: url("./assets/QR.jpg");
@@ -240,9 +239,16 @@
 }
 
 .score_containers{
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+}
+
+.score .share{
+    position: relative;
+    right: -123px;
+    cursor: pointer;
 }
 
 .score_containers i{
@@ -436,7 +442,7 @@
 
     .overlay .alert div{
         height: auto;
-        width: 220px;
+        width: auto;
         margin-right: 10px;
     }
 
@@ -445,7 +451,7 @@
         height: 26px;
         position: relative;
         top: -6px;
-        left: 150px;
+        left: 10px;
     }
 
     .flexible-container{
@@ -690,6 +696,7 @@
         height: 26px;
         position: relative;
         top: -6px;
+        left: 10px;
     }
 
     .margin{
@@ -698,3 +705,16 @@
 
 }
 /* --------------------------------------------------------------------------------------------- */
+/* Share Button */
+/* Score Card Popup */
+/* Attractive Score Card Styling */
+
+#scoreCard input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 2px solid #ff4757;
+    border-radius: 5px;
+    text-align: center;
+}

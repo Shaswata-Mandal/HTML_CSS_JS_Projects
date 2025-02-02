@@ -7,6 +7,7 @@ let level=0;
 let maxScore=0;
 let hearts=5;
 let hints=5;
+let previousScore=0;
 
 
 //Start decting for the key press
@@ -75,7 +76,6 @@ function boxFlash(box){
 
 //----------------------------------------------------------------------------------------------------------------
 //Taking user inputs for the sequence
-
 //Adding events to all the boxes to listen to the click
 let allBoxes=document.querySelectorAll(".boxes");
 
@@ -101,6 +101,7 @@ function boxPress(){
     
 }
 
+//Checking if the user choose the right color or not after each click
 function checkAns(){
 
     if( (userSeq[userSeq.length-1]===gameSeq[userSeq.length-1]) && (userSeq.length==gameSeq.length)){
@@ -119,7 +120,7 @@ function checkAns(){
 }
 
 // ----------------------------------------------------------------------------------------------------------------
-
+//Functioning after user hits any wrong color---------------------------------------
 //If user chooses wrong box at any point of time
 function wrongSeq(){
     //Giving a background color if user selects wrong box at any point of time
@@ -152,8 +153,8 @@ function wrongSeq(){
     
 }
 
-//--------------------------------------------------------------------------------------------
-//Heart Feature Functioning
+//----------------------------------------------------------------------------------------------
+//Heart Feature Functioning------------------------------------------
 let heartContainer=document.querySelector(".hearts");
 //If trying to access heart before starting the game
 heartContainer.addEventListener("click", heartAlert);
@@ -196,6 +197,7 @@ function heartFunctioning(){
 }
 
 //----------------------------------------------------------------------------------------------------------
+//Restart Funcitoning----------------------------------------------------
 //If not heart then restart after any key is pressed
 function restart(){
     document.addEventListener("keypress", reset);
@@ -203,7 +205,6 @@ function restart(){
         document.querySelector(".game_status").addEventListener("click", reset);
     }
 }
-
 
 //Function for restarting the game
 function reset(){
@@ -215,6 +216,7 @@ function reset(){
     //Updating the current score
     let currentScore=document.querySelector(".previousScore");
     currentScore.innerText=`Previous Score: ${level-1}`;
+    previousScore=level-1;
 
     let heartCounter=document.querySelector(".hearts .count");
     heartCounter.innerText=`5`;
@@ -238,17 +240,14 @@ function reset(){
     //Updating the global variable to its initial values
     userSeq=[];
     gameSeq=[];
-    started=false;
+    // started=false;
     hearts=5;
     hints=5;
     keyDetection();
 }
 
-
-
 //-------------------------------------------------------------------------------------------------
 //Hint feature code------------------------
-
 //Getting the hint container and adding event (used chatGPT to generate the flipping effect)
 let hintContainer=document.querySelector(".hint");
 hintContainer.addEventListener("click", hintFunctioning);
@@ -298,8 +297,6 @@ function hintFunctioning(){
     
 }
 
-
-
 //----------------------------------------------------------------------------------------------------------------
 //Alert Functioning
 
@@ -316,7 +313,6 @@ function customAlert(message){
         overlay.style.display="none";
     });
 }
-
 
 //----------------------------------------------------------------------------------
 //Dark theme Functionality (Done with chatGPT)
@@ -339,7 +335,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
 // --------------------------------------------------------------------------------------------------
 //Code for dynamic changing of website title 
 document.addEventListener("visibilitychange", function() {
@@ -352,3 +347,39 @@ document.addEventListener("visibilitychange", function() {
         }, 2000);
     }
 });
+
+// ----------------------------------------------------------------------------------------------------
+//Scorecard sharing functionality-----------used chatGPT
+let message;
+
+function handleShare() {
+    if (!started) {
+        customAlert("You can use the Share button only when the game is Started!");
+    } else {
+        //Updating score on scorecard
+        let scoreDetailParent=document.querySelector(".score-details");
+        scoreDetailParent.children[1].innerText=`Level: ${level}`;
+        scoreDetailParent.children[2].innerText=`Current Score: ${level-1}`;
+        scoreDetailParent.children[3].innerText=`Previous Score: ${previousScore}`;
+        scoreDetailParent.children[4].innerText=`Max Score: ${maxScore}`;
+        scoreDetailParent.children[5].innerText=`Lives Left: ❤️ ${hearts}`;
+        scoreDetailParent.children[6].innerText=`Hints Left: 😊 ${hints}`;
+
+        //Updating message
+        const playerName = document.getElementById("playerName")?.value || "Player";
+        message= `🎮 ${playerName} just scored!\nLevel: ${level}\nCurrent Score: ${level-1}\nPrevious Score: ${previousScore}\nMax Score: ${maxScore}\nLives Left: ❤️ ${hearts}\nHints Left: 😊 ${hints}\nPlay Now: https://shaswata-mandal.github.io/HTML_CSS_JS_Projects/Simon%20Says/`;
+       
+        // Show Bootstrap Modal
+        var myModal = new bootstrap.Modal(document.getElementById('scoreCard'));
+        myModal.show();
+    }
+}
+
+//Function to copy the message to the clipboard
+function copyToClipboard() {
+    navigator.clipboard.writeText(message).then(() => {
+        alert("✅ Score copied to clipboard!");
+    }).catch(err => {
+        alert("❌ Failed to copy score. Try again!");
+    });
+}
