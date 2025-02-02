@@ -25,17 +25,15 @@ function start(){
 function keyDetection(){
     let h1=document.querySelector(".game_status");
     h1.innerText="Game Started!";
-    started=true;    
+    started=true;   
+    
+    if(window.innerWidth<=480 && h1.innerText.trim()==="Game Started!"){
+        h1.classList.add("margin");
+    }
 
     //stop detecting keypress after the game has started
     document.removeEventListener("keypress", keyDetection);
     document.querySelector(".game_status").removeEventListener("click", keyDetection);
-
-
-    //Updating current score to zero before starting the current game
-    //Updating the current score
-    // let currentScore=document.querySelector(".currentScore");
-    // currentScore.innerText=`Current Score: 0`;
     
     //Flashing the new box and Levleing up
     levelUp();
@@ -137,6 +135,7 @@ function wrongSeq(){
     if(window.innerWidth<=1024){
         h1.innerText="Wrong! Use Hearts/Press Here";
         h1.style.textAlign="center";
+        h1.classList.remove("margin");
     }
 
     if(hearts==0){
@@ -175,12 +174,16 @@ function useHearts(){
 function heartFunctioning(){
     //Removing the event from the document so that if heart is used then, it does not accepts any other keypress
     document.removeEventListener("keypress", reset);
+    document.querySelector(".game_status").removeEventListener("click", reset);
 
     hearts--;
 
     heartContainer.removeEventListener("click", heartFunctioning);
     let h1=document.querySelector(".game_status");
     h1.innerText="Game Revived!";
+    if(window.innerWidth<=480 && h1.innerText.trim()==="Game Revived!"){
+        h1.classList.add("margin");
+    }
     
     let heartCounter=document.querySelector(".hearts .count");
     heartCounter.innerText=`${hearts}`;

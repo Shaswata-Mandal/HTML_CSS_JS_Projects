@@ -429,8 +429,23 @@
 
     .overlay .alert{
         width: 480px;
+        height: auto;
         position: fixed;
         top: 0;
+    }
+
+    .overlay .alert div{
+        height: auto;
+        width: 220px;
+        margin-right: 10px;
+    }
+
+    .overlay .alert .cross{
+        width: 18px;
+        height: 26px;
+        position: relative;
+        top: -6px;
+        left: 150px;
     }
 
     .flexible-container{
@@ -539,10 +554,15 @@
     }
 
     .overlay .alert{
-        width: 320px;
-        height: 50px;
+        width: 480px;
+        height: 100px;
         position: fixed;
         top: 0;
+        padding: 16px;
+    }
+
+    .overlay .alert div{
+        height: auto;
     }
 
     .qrCode{
@@ -567,8 +587,6 @@
     }
 
     .flexible-container .left{
-        /* display: none; */
-        /* width: 103px !important; */
         height: 300px;
         margin: 5px;
         display: flex;
@@ -645,7 +663,7 @@
     }
 
     .right{
-        min-height: 365px;
+        min-height: 369px;
     }
 
     .hint .back {
@@ -655,13 +673,13 @@
 
     .overlay .alert{
         width: 320px;
-        height: 90px;
+        height: auto;
         position: fixed;
         top: 0;
     }
 
     .overlay .alert div{
-        height: 70px;
+        height: auto;
         width: 220px;
         margin-right: 10px;
     }
@@ -671,6 +689,10 @@
         height: 26px;
         position: relative;
         top: -6px;
+    }
+
+    .margin{
+        margin-top: 25px;
     }
 
 }
