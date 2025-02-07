@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Mini Projects</title>
+    <link rel="icon" href="assets/logo.png">
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./assets/logo.png">
+    <!-- Google fonts Connection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Connection -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <main>
+
+        <div class="main-container">
+
+            <div class="flexible-container">
+                <div class="content-box">
+
+                    <div id="box1" class="level"><h1>Currency Converter</h1></div>
+
+                    <div id="box2" class="level">
+                        <label for="amount">Enter the amount</label>
+                        <input type="number" value="1" min="1" id="amount">
+                    </div>
+
+                    <div id="box3" class="level">
+                        <div class="left">
+                            <p>From</p>
+                            <img src="">
+                            <select name="from" id="from-currency" class="selector">
+                                <!-- <option value="USD">USDr</option>
+                                <option value="INR">INrr</option> -->
+                            </select>
+                        </div>
+                        <div class="middle"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+                        <div class="right">
+                            <p>To</p>
+                            <img src="">
+                            <select name="to" id="to-currency" class="selector">
+                                <!-- <option value="USD">USDr</option>
+                                <option value="INR">INRr</option> -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="box4" class="level">
+                        <p style="font-size: 30px;">Conversion</p>
+                        <p id="msg">1 USD = 85 INR</p>
+                    </div>
+
+                    <div id="box5" class="level">
+                        <div id="convert-button">Convert</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </main>
+
+    <script src="codes.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
