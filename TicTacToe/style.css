@@ -6,7 +6,7 @@
 /* Nav Bar Styling------------------------------------------------------------------------- */
 
 .nav_bar{
-    background-color: rgb(127, 255, 212);
+    background-color: #f99c45;
     width: 100%;
     height: 35px;
     display: flex;
@@ -34,7 +34,7 @@
 .logo .icon{
     background-image: url('./assets/logo.png');
     background-size: cover;
-    height: 33px;
+    height: 30px;
     width: 30px;
 }
 
@@ -96,7 +96,7 @@
 /* Main Container Styling--------------------------------------------------------------- */
 
 .main_container{
-    background-color: rgba(127, 255, 212, 0.327);
+    background-color: rgb(249, 155, 69, 0.327);
     width: 100%;
     height: 100vh;
     display: flex;
@@ -160,6 +160,7 @@
     height: 550px;
     margin: 55px 20px 20px 10px;
     display: flex;
+    padding-bottom: 8px;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
@@ -175,41 +176,37 @@
 }
 
 .game_box{
-    width: 490px;
-    height: 460px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    /* background-color: red; */
+    width: clamp(250px, 95%, 490px);
+    height: clamp(320px, 85%, 460px);
+    /* margin: 10px; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    
 }
+
+.game_status{
+    text-align: center;
+    padding: 5px;
+    margin: 0;
+}
+
 
 .boxes{
-    height: 200px;
-    width: 200px;
-    border-radius: 20%;
-    border: 4px solid black;
-    background-color: black;
+    border: 3px solid black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f99c45c5;
+    font-size: 2rem;
+    font-weight: bold;
     cursor: pointer;
-}
+  }
 
-.yellow{
-    background-color: #f99b45;
-}
 
-.red{
-    background-color: #d95980;
-}
-
-.purple{
-    background-color: #819ff9;
-}
-
-.green{
-    background-color: #63aac0;
-}
-
-.flash{
-    background-color: white;
-}
 
 
 /* Left box styling--------------------------------- */
@@ -264,52 +261,50 @@
     font-size: 28px;
 }
 
-.hearts, .hint .front, .hint .back{
+select {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: rgba(127, 255, 212, 0);
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #1e88e5; /* Highlight color on focus */
+}
+
+.players{
     width: 170px;
     height: 130px;
     margin: 10px;
     border-radius: 20px;
+    font-size: 5em;
     border: 5px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    backface-visibility: hidden;
-    /* background-color: black; */
 }
 
-.hint .back{
-    /* display: none; */
-    text-align: center;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 28px;
-    font-weight: 600;
-    position: absolute;
-    top: 0px;
-
-    /* background-color: #fe6cf2; */
-    color: white;
-    transform: rotateY(180deg);
+.red{
+    background-color: #d95980;
 }
 
-.hint{
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
+.purple{
+    background-color: #819ff9;
 }
 
-.hearts i, .hint .front i, .count{
-    font-size: 60px;
-    margin: 8px;
+.green{
+    background-color: #63aac0;
 }
 
-.hearts span{
-    color: #fb6060; 
+.yellow{
+    background-color: #f99c45c5;
 }
-
-.hint .front span{
-    color: #fe6cf2;
-}
-
 
 
 
@@ -364,15 +359,23 @@
     color: #e0e0e0;
 }
 
-.dark-theme .hearts, 
-.dark-theme .hint .front, 
-.dark-theme .hint .back {
+.dark-theme .players{
     /* background-color: #333; */
     border-color: #e0e0e0;
 }
 
-.dark-theme .hint .back {
+.dark-theme .players{
     color: #e0e0e0;
+}
+
+.dark-theme select{
+    color: #e0e0e0;
+    border: 2px solid #e0e0e0;
+    
+}
+
+.dark-theme select option{
+    color: black;
 }
 
 .dark-theme .hearts span {
@@ -487,19 +490,6 @@
         margin: 5px;
         /* max-height: 550px; */
     }
-
-    .flexible-container .right .game_box{
-        width: 100%;
-        height: 400px;
-        max-width: 420px;
-    }
-
-    .flexible-container .right .boxes{
-        height: 190px;
-        width: 190px;
-        max-width: 200px;
-        max-height: 200px;
-    }
 }
 
 
@@ -603,20 +593,24 @@
         /* background-color: pink; */
     }
 
-    .score, .hearts{
+    .score, .players{
         margin-bottom: 8px;
         transform: scale(0.8);
     }
 
-    .hearts{
+    .players{
         position: relative;
         top: -40px;
-        right: 10px;
     }
 
-    .game_status{
-        text-align: center;
+    #cross{
+        right: -20px;
     }
+
+    #circle{
+        right: 20px;
+    }
+
 
     .flexible-container .right{
         /* transform: scale(0.7);   */
@@ -626,59 +620,9 @@
         margin: 0;
     }
 
-    .game_box{
-        transform: scale(0.6);
-        height: 650px;
-        position: relative;
-        top: -80px;
-    }
-
-    .boxes{
-        margin-bottom: 20px;
-    }
-
 }
 
 @media (max-width: 480px) {
-    .hint {
-        width: 136px; /* Reduce width */
-        height: 104px; /* Reduce height */
-        font-size: 15px; /* Reduce font size */
-        position: relative;
-        top: -50px;
-        left: -30px;
-        transform-origin: center center !important;
-    }
-
-    .hint .front, .hint .back {
-        width: 100%;
-        height: 100%;
-        border: 4px solid black;
-    }
-
-    .hint .back{
-        position: relative;
-        top: -114px;
-        left: -20px;
-    }
-
-    .front span{
-        font-size: 48px;
-    }
-
-    .game_status{
-        margin-top: 8px;
-        text-align: center;
-    }
-
-    .right{
-        min-height: 369px;
-    }
-
-    .hint .back {
-        font-size: 20px; /* Adjust text size */
-        
-    }
 
     .overlay .alert{
         width: 320px;

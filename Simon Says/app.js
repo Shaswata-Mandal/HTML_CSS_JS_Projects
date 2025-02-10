@@ -383,3 +383,28 @@ function copyToClipboard() {
         alert("❌ Failed to copy score. Try again!");
     });
 }
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------
+// Loading styling(using chatGPT)-----------------
+
+let load = 0;
+let loadingText = document.getElementById('loading-text');
+
+function updateLoading() {
+    if (load < 100) {
+        load++;
+        loadingText.innerText = load + "%";
+        setTimeout(updateLoading, 20); // Adjust speed of loading
+    } else {
+        // Ensure splash screen disappears only after reaching 100%
+        setTimeout(() => {
+            document.getElementById('splash').style.animation = "fadeOut 1s ease-out forwards";
+            setTimeout(() => {
+                document.getElementById('splash').style.display = 'none';
+            }, 1100); // Matches fade-out duration
+        }, 500); // Extra delay to let 100% stay visible for a moment
+    }
+}
+
+updateLoading();
