@@ -687,7 +687,9 @@ select:focus {
 
 /* Logo Styling */
 #splash img {
-    width: 400px; /* Adjust size */
+    width: 200px;
+    height: 200px;
+    margin-bottom: 30px;
     animation: zoomIn 1s ease-in-out; /* Zoom-in effect */
 }
 
