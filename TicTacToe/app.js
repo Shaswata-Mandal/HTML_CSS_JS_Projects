@@ -294,7 +294,7 @@ function copyToClipboard() {
 
     //Updating message
         
-    message= `🎮 ${playerName1} vs ${playerName2}\n${playerName1}: ${xWinCount} Wins\n${playerName2}: ${oWinCount} Wins\nDraws: ${drawCount}\nPlay Now: https://shaswata-mandal.github.io/HTML_CSS_JS_Projects/TicTacToe/`;
+    message= `🎮 ${playerName1} vs ${playerName2}\n${playerName1}: ${xWinCount} Wins\n${playerName2}: ${oWinCount} Wins\nDraws: ${drawCount}\nPlays Now: https://shaswata-mandal.github.io/HTML_CSS_JS_Projects/TicTacToe/`;
     
     navigator.clipboard.writeText(message).then(() => {
         alert("✅ Score copied to clipboard!");
