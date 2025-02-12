@@ -45,7 +45,7 @@ async function getWeather(city) {
         console.log(baseURL+`&${city}`+`&apiid=${apiKey}`);
         console.log(response.data);
 
-        let imgSrc = `https://shaswata-mandal.github.io/HTML_CSS_JS_Projects/WeatherApp/assets/${response.data.weather[0].main}.png`;
+        let imgSrc = `assets/${response.data.weather[0].main}.png`;
 
         // Creating a new Image object to check if the file exists
         let img = new Image();
@@ -54,7 +54,7 @@ async function getWeather(city) {
             weatherImg.children[0].setAttribute("src", imgSrc);
         };
         img.onerror = () => {
-            weatherImg.children[0].setAttribute("src", `./assets/clear.png`);
+            weatherImg.children[0].setAttribute("src", `assets/clear.png`);
         };
     
         temperature.innerHTML=`${response.data.main.temp} <div class="degree"></div> C`;
