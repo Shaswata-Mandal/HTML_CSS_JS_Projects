@@ -56,7 +56,7 @@ async function getWeather(city) {
             weatherImg.children[0].setAttribute("src", imgSrc);
         };
         img.onerror = () => {
-            weatherImg.children[0].setAttribute("src", `./assets/clear.png`);
+            weatherImg.children[0].setAttribute("src", `assets/clear.png`);
         };
     
         temperature.innerHTML=`${response.data.main.temp} <div class="degree"></div> C`;
