@@ -45,7 +45,7 @@ async function getWeather(city) {
         console.log(baseURL+`&${city}`+`&apiid=${apiKey}`);
         console.log(response.data);
 
-        let imgSrc = `/assets/${response.data.weather[0].main.toLowerCase()}.png`;
+        let imgSrc = `/assets/${response.data.weather[0].main}.png`;
 
         // Creating a new Image object to check if the file exists
         let img = new Image();
