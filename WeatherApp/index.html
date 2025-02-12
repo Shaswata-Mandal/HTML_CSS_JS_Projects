@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="icon" href="">
+    <link rel="stylesheet" href="style.css">
+    <!-- Google fonts Connection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Connection -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <main>
+
+        <div class="flexible-container">
+
+            <div class="main-content">
+
+                <div class="loader-box"><div id="loading" class="loader"></div></div> 
+
+                <div class="row1 row-info">
+                    <form action="" id="user-input">
+                        <input type="text" placeholder="Enter the city" id="city-input">
+                        <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </form>
+                </div>
+
+                <div class="row2 row-info">
+                    <div class="weather-icon"><img src="/assets/thunder.png" alt=""></div>
+                    <div class="temperature">22 <div class="degree"></div> C</div>
+                    <div class="weather-description">
+                        <span>Mostly Sunny</span>
+                        <span>32 <div class="degree" style="height: 3px; width: 3px; margin: 2px;"></div> C / 40 <div class="degree" style="height: 3px; width: 3px; margin: 2px;"></div> C</span>
+                    </div>
+                    <div class="city">Delhi</div>
+                </div>
+
+                <div class="row3 row-info">
+                    <div class="col">
+                        <div class="icon"><i class="fa-solid fa-droplet"></i></div>
+                        <div class="info">
+                            <span class="varialbe" id="humidity">48%</span>
+                            <span>Humidity</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="icon"><i class="fa-solid fa-wind"></i></div>
+                        <div class="info">
+                            <span class="varialbe" id="wind-speed">10.9 Km/h</span>
+                            <span>Wind Speed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row4 row-info">
+                    <div class="extra-weather-info">
+                        <div class="row"><i class="fa-solid fa-temperature-low"></i></div>
+                        <div class="row">Feels Like</div>
+                        <div class="row" style="display: flex;">
+                            <span style="display: flex;">32 <div class="degree" style="height: 3px; width: 2px; margin: 2px;"></div> C</span>
+                        </div>
+                    </div>
+                    <div class="extra-weather-info">
+                        <div class="row"><i class="fa-solid fa-arrow-down-short-wide"></i></div>
+                        <div class="row">Pressure</div>
+                        <div class="row">
+                            <span>5</span>
+                            <span>Km/h</span>
+                        </div>
+                    </div>
+                    <div class="extra-weather-info">
+                        <div class="row"><i class="fa-solid fa-water"></i></div>
+                        <div class="row">Sea Level</div>
+                        <div class="row">
+                            <span>5</span>
+                            <span>Km/h</span>
+                        </div>
+                    </div>
+                    <div class="extra-weather-info">
+                        <div class="row"><i class="fa-solid fa-water"></i></div>
+                        <div class="row">Grd Level</div>
+                        <div class="row">
+                            <span>5</span>
+                            <span>Km/h</span>
+                        </div>
+                    </div>
+                    <div class="extra-weather-info">
+                        <div class="row"><i class="fa-solid fa-eye"></i></div>
+                        <div class="row">Visibility</div>
+                        <div class="row">
+                            <span>5</span>
+                            <span>Km/h</span>
+                        </div>
+                    </div>
+                    <div class="extra-weather-info">
+                        <div class="row"><i class="fa-solid fa-sun"></i></div>
+                        <div class="row">UV</div>
+                        <div class="row">
+                            <span>7</span>
+                            <span>Strong</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="app.js"></script>
+    
+</body>
+</html>
