@@ -6,6 +6,7 @@ let drawCount=0;
 const patterns=[[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]];
 let boxes=document.querySelectorAll(".boxes");
 let gameStatus=document.querySelector(".game_status");
+let gameMode=document.querySelector("#game-mode");
 
 start();
 
@@ -31,7 +32,7 @@ function restart(){
     updatePlayerTurnIndicator();
     document.removeEventListener("keypress", restart);
     document.querySelector(".game_status").removeEventListener("click", restart);
-    console.log(started);
+    // console.log(started);
     boxClickable();
 }
 
@@ -61,8 +62,20 @@ function updateBox(box){
         box.innerText="X";
         box.classList.add("purple");
         playerX=false;
+
+        setTimeout(()=>{
+            if(gameMode.value==="1-player-easy" && playerX===false){
+                easyComputerMove();
+            }
+        }, 500); 
+
+        setTimeout(()=>{
+            if(gameMode.value==="1-player-hard" && playerX===false){
+                hardComputerMove();
+            }
+        }, 500); 
     }
-    else{
+    else if(gameMode.value!="1-player-easy"){
         box.innerText="O";
         box.classList.add("green");
         playerX=true;
@@ -72,7 +85,6 @@ function updateBox(box){
 
     //Once a box is clicked check if any winning pattern is formed or not
     checkPattern();
-
 }
 
 
@@ -114,7 +126,7 @@ function checkPattern(){
                 started=false;
                 playerX=true;
                 updatePlayerTurnIndicator();
-                console.log("game stoped")
+                // console.log("game stoped")
                 setTimeout(()=>{
                     start();
                     if(window.innerWidth<=1024){
@@ -204,7 +216,6 @@ let circle=document.querySelector("#circle");
 
 function updatePlayerTurnIndicator(){
     if(playerX && started){
-        console.dir(cross.style);
         cross.classList.add("red");
         circle.classList.remove("red");
     }
@@ -221,6 +232,150 @@ function updatePlayerTurnIndicator(){
 
 
 //----------------------------------------------------------------------------------------------------------------
+//for computer to play this game, you need to apply some adaptive algorithm instead of the following generalized code which runs as expected in certain situations only
+//One player mode
+//cons: cannot track opponents move and cannot get the winning move for itself
+
+function randomIndexGenerator(){
+    return Math.floor(Math.random()*9)+1;
+}
+
+function easyComputerMove(){
+    let count=0;
+    boxes.forEach(box=>{
+        if(box.innerText!=""){
+            count++;
+        }
+    });
+
+    if(count<8){
+        let randomIndex = randomIndexGenerator();
+        let box = document.getElementById(`${randomIndex}`);
+        while (true) {
+            if (box.innerText!="") {
+                randomIndex = randomIndexGenerator();
+                box = document.getElementById(`${randomIndex}`);
+            }
+            else {
+                break;
+            }
+        }
+        box.removeEventListener("click", handleClick);
+        box.innerText = "O";
+        box.classList.add("green");
+        playerX = true;
+    }
+
+    updatePlayerTurnIndicator();
+    checkPattern();   
+}
+
+
+
+
+//----------------------------------------------------------------------------------------------------------------
+//One player mode hard
+//Pros: tracks opponents move and if winning then stops it
+//Cons: Cannot always find the winning move and cannot prioritize if it should stop opponent from winning in a situation where it was winning if it would not had stopped the opponent
+
+
+function hardComputerMove(){
+    let count=0;
+    let computerMoveIndex;
+    boxes.forEach(box=>{
+        if(box.innerText!=""){
+            count++;
+        }
+    });
+
+    if(count<8){
+
+        //everything will be same as the easy one. only when we are deciding the index on which computer move is place, we need to check if the opponent is winning or not:
+        //if opponent is winning, then stop them. if not then find winning pattern and place computer move. else place randomly
+
+        if(opponentCheck()!=0){
+            computerMoveIndex=opponentCheck();
+            console.log("here: ", computerMoveIndex)
+        }
+        else if(winningPattern()!=null){
+            let pattern=winningPattern();
+            console.log(pattern)
+            for(let index of pattern){
+                if(document.getElementById(`${index}`).innerText===""){
+                    computerMoveIndex=index;
+                    console.log("done")
+                    break;
+                }
+            }
+        }
+        else{
+            let randomIndex = randomIndexGenerator();
+            let boxCheck = document.getElementById(`${randomIndex}`);
+            while (true) {
+                if (boxCheck.innerText != "") {
+                    randomIndex = randomIndexGenerator();
+                    boxCheck = document.getElementById(`${randomIndex}`);
+                }
+                else {
+                    computerMoveIndex=randomIndex;
+                    console.log("here2: ", computerMoveIndex)
+                    break;
+                }
+            }
+        }
+
+        console.log("here last: ", computerMoveIndex)
+
+        box=document.getElementById(`${computerMoveIndex}`);
+        box.removeEventListener("click", handleClick);
+        box.innerText = "O";
+        box.classList.add("green");
+        playerX = true;
+    }
+
+    updatePlayerTurnIndicator();
+    checkPattern();   
+}
+
+function opponentCheck(){
+    for(let pattern of patterns){
+        if(document.getElementById(`${pattern[0]}`).innerText!="" && document.getElementById(`${pattern[1]}`).innerText!="" && document.getElementById(`${pattern[2]}`).innerText!=""){
+            return 0;
+        }
+        else if(document.getElementById(`${pattern[0]}`).innerText==="X"&&document.getElementById(`${pattern[1]}`).innerText==="X"){
+            return pattern[2];
+        }
+        else if(document.getElementById(`${pattern[1]}`).innerText==="X"&&document.getElementById(`${pattern[2]}`).innerText==="X"){
+            return pattern[0];
+        }
+        else if(document.getElementById(`${pattern[0]}`).innerText==="X"&&document.getElementById(`${pattern[2]}`).innerText==="X"){
+            return pattern[1];
+        }
+    }
+    return 0;
+}
+
+
+function winningPattern(){
+    for(let pattern of patterns){
+        if(document.getElementById(`${pattern[0]}`).innerText!="" && document.getElementById(`${pattern[1]}`).innerText!="" && document.getElementById(`${pattern[2]}`).innerText!=""){
+            return null;
+        }
+        else if(document.getElementById(`${pattern[0]}`).innerText===""&&document.getElementById(`${pattern[1]}`).innerText==""&&document.getElementById(`${pattern[2]}`).innerText==""){
+            return pattern;
+        }
+        else if( ((document.getElementById(`${pattern[0]}`).innerText==="O"&&document.getElementById(`${pattern[1]}`).innerText==="O"&&document.getElementById(`${pattern[2]}`).innerText!="")) || ((document.getElementById(`${pattern[1]}`).innerText==="O"&&document.getElementById(`${pattern[2]}`).innerText==="O"&&document.getElementById(`${pattern[0]}`).innerText!="")) || ((document.getElementById(`${pattern[0]}`).innerText==="O"&&document.getElementById(`${pattern[2]}`).innerText==="O"&&document.getElementById(`${pattern[1]}`).innerText!="")) ){
+            return pattern;
+        }
+        else if((document.getElementById(`${pattern[0]}`).innerText==="O"&&document.getElementById(`${pattern[1]}`).innerText!=""&&document.getElementById(`${pattern[2]}`).innerText!="") || (document.getElementById(`${pattern[1]}`).innerText==="O"&&document.getElementById(`${pattern[0]}`).innerText!=""&&document.getElementById(`${pattern[2]}`).innerText!="") || (document.getElementById(`${pattern[2]}`).innerText==="O"&&document.getElementById(`${pattern[1]}`).innerText!=""&&document.getElementById(`${pattern[0]}`).innerText!="")){
+            return pattern;
+        }
+    }
+    return null;
+}
+
+
+//----------------------------------------------------------------------------------------------------------------
 //Alert Functioning
 
 function customAlert(message){
@@ -229,7 +384,6 @@ function customAlert(message){
 
     let alert=document.querySelector(".overlay .custom-alert");
     alert.children[1].innerText=`${message}`;
-    console.log();
 
     let cross=document.querySelector(".cross");
     cross.addEventListener("click", ()=>{
