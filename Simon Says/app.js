@@ -43,7 +43,7 @@ function keyDetection(){
 
 //Function to flash a random box when level gets updated
 function levelUp(){
-    console.log("--------------------");
+    // console.log("--------------------");
     level++;
     let levelDisplay=document.querySelector(".level");
     levelDisplay.innerHTML=`Level: ${level}`;
@@ -57,7 +57,7 @@ function levelUp(){
     let rndIndx=Math.floor(Math.random()*3);
     let rndColor=boxes[rndIndx];
     gameSeq.push(rndColor);
-    console.log("New gaem seq: ", gameSeq);
+    // console.log("New gaem seq: ", gameSeq);
     
     //Selecting and flashing the random box that the game has generated
     let rndBox=document.querySelector(`.${rndColor}`);
@@ -306,7 +306,6 @@ function customAlert(message){
 
     let alert=document.querySelector(".overlay .custom-alert");
     alert.children[1].innerText=`${message}`;
-    console.log();
 
     let cross=document.querySelector(".cross");
     cross.addEventListener("click", ()=>{

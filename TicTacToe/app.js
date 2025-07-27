@@ -295,15 +295,15 @@ function hardComputerMove(){
 
         if(opponentCheck()!=0){
             computerMoveIndex=opponentCheck();
-            console.log("here: ", computerMoveIndex)
+            // console.log("here: ", computerMoveIndex)
         }
         else if(winningPattern()!=null){
             let pattern=winningPattern();
-            console.log(pattern)
+            // console.log(pattern)
             for(let index of pattern){
                 if(document.getElementById(`${index}`).innerText===""){
                     computerMoveIndex=index;
-                    console.log("done")
+                    // console.log("done")
                     break;
                 }
             }
@@ -324,7 +324,7 @@ function hardComputerMove(){
             }
         }
 
-        console.log("here last: ", computerMoveIndex)
+        // console.log("here last: ", computerMoveIndex)
 
         box=document.getElementById(`${computerMoveIndex}`);
         box.removeEventListener("click", handleClick);
